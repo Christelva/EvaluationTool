@@ -13,7 +13,7 @@ export default (batch) => {
   return (dispatch) => {
     dispatch({ type: APP_LOADING })
 
-    api.post(`/batches/${batch._id}/players`, {})
+    api.post(`/batches/${batch._id}/students`, {})
       .then(() => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })

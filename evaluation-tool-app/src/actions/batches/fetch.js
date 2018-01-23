@@ -38,11 +38,11 @@ export default () => {
   }
 }
 
-export const fetchPlayers = (batch) => {
+export const fetchStudents = (batch) => {
   return dispatch => {
     dispatch({ type: APP_LOADING })
 
-    api.get(`/batches/${batch._id}/players`)
+    api.get(`/batches/${batch._id}/students`)
       .then((result) => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
@@ -51,7 +51,7 @@ export const fetchPlayers = (batch) => {
           type: GAME_PLAYERS_UPDATED,
           payload: {
             batch,
-            players: result.body
+            students: result.body
           }
         })
       })

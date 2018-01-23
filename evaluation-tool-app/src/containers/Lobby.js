@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import fetchBatches, { fetchPlayers } from '../actions/batches/fetch'
+import fetchBatches, { fetchStudents } from '../actions/batches/fetch'
 import { connect as subscribeToWebsocket } from '../actions/websocket'
 
 import Paper from 'material-ui/Paper'
@@ -27,4 +27,4 @@ class Lobby extends PureComponent {
 
 const mapStateToProps = ({ batches, currentUser }) => ({ batches, currentUser })
 
-export default connect(mapStateToProps, { fetchBatches, subscribeToWebsocket, fetchPlayers, push })(Lobby)
+export default connect(mapStateToProps, { fetchBatches, subscribeToWebsocket, fetchStudents, push })(Lobby)
