@@ -1,4 +1,4 @@
-// routes/batchs.js
+
 const router = require('express').Router()
 const passport = require('../../config/auth')
 const { Batch, User } = require('../../models')
@@ -16,17 +16,17 @@ const loadBatch = (req, res, next) => {
     .catch((error) => next(error))
 }
 
-const getPlayers = (req, res, next) => {
-  Promise.all(req.batch.players.map(player => User.findById(player.userId)))
+const getStudents = (req, res, next) => {
+  Promise.all(req.batch.students.map(student => User.findById(student.userId)))
     .then((users) => {
-      // Combine player data and user's name
-      req.players = req.batch.players.map((player) => {
+
+      req.students = req.batch.students.map((student) => {
         const { name } = users
-          .filter((u) => u._id.toString() === player.userId.toString())[0]
+          .filter((u) => u._id.toString() === student.userId.toString())[0]
 
         return {
-          userId: player.userId,
-          pairs: player.pairs,
+          userId: student.userId,
+          pairs: student.pairs,
           name
         }
       })
@@ -37,24 +37,24 @@ const getPlayers = (req, res, next) => {
 
 module.exports = io => {
   router
-    .get('/batchs/:id/players', loadBatch, getPlayers, (req, res, next) => {
-      if (!req.batch || !req.players) { return next() }
-      res.json(req.players)
+    .get('/batchs/:id/students', loadBatch, getStudents, (req, res, next) => {
+      if (!req.batch || !req.students) { return next() }
+      res.json(req.students)
     })
 
-    .post('/batchs/:id/players', authenticate, loadBatch, (req, res, next) => {
+    .post('/batchs/:id/students', authenticate, loadBatch, (req, res, next) => {
       if (!req.batch) { return next() }
 
       const userId = req.account._id
 
-      if (req.batch.players.filter((p) => p.userId.toString() === userId.toString()).length > 0) {
+      if (req.batch.students.filter((p) => p.userId.toString() === userId.toString()).length > 0) {
         const error = Error.new('You already joined this batch!')
         error.status = 401
         return next(error)
       }
 
-      // Add the user to the players
-      req.batch.players.push({ userId, pairs: [] })
+
+      req.batch.students.push({ userId, pairs: [] })
 
       req.batch.save()
         .then((batch) => {
@@ -63,33 +63,33 @@ module.exports = io => {
         })
         .catch((error) => next(error))
     },
-    // Fetch new player data
-    getPlayers,
-    // Respond with new player data in JSON and over socket
+
+    getStudents,
+
     (req, res, next) => {
       io.emit('action', {
         type: 'GAME_PLAYERS_UPDATED',
         payload: {
           batch: req.batch,
-          players: req.players
+          students: req.students
         }
       })
-      res.json(req.players)
+      res.json(req.students)
     })
 
-    .delete('/batchs/:id/players', authenticate, (req, res, next) => {
+    .delete('/batchs/:id/students', authenticate, (req, res, next) => {
       if (!req.batch) { return next() }
 
       const userId = req.account._id
-      const currentPlayer = req.batch.players.filter((p) => p.userId.toString() === userId.toString())[0]
+      const currentStudent = req.batch.students.filter((p) => p.userId.toString() === userId.toString())[0]
 
-      if (!currentPlayer) {
-        const error = Error.new('You are not a player of this batch!')
+      if (!currentStudent) {
+        const error = Error.new('You are not a student of this batch!')
         error.status = 401
         return next(error)
       }
 
-      req.batch.players = req.batch.players.filter((p) => p.userId.toString() !== userId.toString())
+      req.batch.students = req.batch.students.filter((p) => p.userId.toString() !== userId.toString())
       req.batch.save()
         .then((batch) => {
           req.batch = batch
@@ -98,18 +98,18 @@ module.exports = io => {
         .catch((error) => next(error))
 
     },
-    // Fetch new player data
-    getPlayers,
-    // Respond with new player data in JSON and over socket
+
+    getStudents,
+
     (req, res, next) => {
       io.emit('action', {
         type: 'GAME_PLAYERS_UPDATED',
         payload: {
           batch: req.batch,
-          players: req.players
+          students: req.students
         }
       })
-      res.json(req.players)
+      res.json(req.students)
     })
 
   return router
