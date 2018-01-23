@@ -1,7 +1,7 @@
 {
-  "name": "memory-batch-api",
+  "name": "Evaluation--tool-api",
   "version": "1.0.0",
-  "description": "API for memory batchs",
+  "description": "API for the Student evaluation Tool",
   "main": "index.js",
   "license": "MIT",
   "engines": {
