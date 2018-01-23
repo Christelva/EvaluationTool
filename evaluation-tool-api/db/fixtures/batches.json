@@ -1,4 +1,4 @@
-{
+{ "name": "Batch #1",
   "batch": "1",
   "startDate": "2017-05-10",
   "endDate": "2017-05-12",
@@ -39,7 +39,7 @@
         "picture": "http://dummyimage.com/100x100.jpg/5fa2dd/ffffff"
       }]
 },
-{
+{ "name": "Batch #2",
   "batch": "2",
   "startDate": "2017-05-12",
   "endDate": "2018-05-02",
@@ -89,7 +89,7 @@
     "picture": "http://dummyimage.com/100x100.jpg/ff4444/ffffff"
   }]
 },
-{
+{ "name": "Batch #3",
   "batch": "3",
   "startDate": "2018-05-02",
   "endDate": "2017-05-04",
