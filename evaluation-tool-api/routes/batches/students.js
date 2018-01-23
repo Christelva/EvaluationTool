@@ -1,4 +1,4 @@
-// routes/batchs.js
+
 const router = require('express').Router()
 const passport = require('../../config/auth')
 const { Batch, User } = require('../../models')
@@ -19,7 +19,7 @@ const loadBatch = (req, res, next) => {
 const getStudents = (req, res, next) => {
   Promise.all(req.batch.students.map(student => User.findById(student.userId)))
     .then((users) => {
-      // Combine student data and user's name
+
       req.students = req.batch.students.map((student) => {
         const { name } = users
           .filter((u) => u._id.toString() === student.userId.toString())[0]
@@ -53,7 +53,7 @@ module.exports = io => {
         return next(error)
       }
 
-      // Add the user to the students
+
       req.batch.students.push({ userId, pairs: [] })
 
       req.batch.save()
@@ -63,9 +63,9 @@ module.exports = io => {
         })
         .catch((error) => next(error))
     },
-    // Fetch new student data
+
     getStudents,
-    // Respond with new student data in JSON and over socket
+
     (req, res, next) => {
       io.emit('action', {
         type: 'GAME_PLAYERS_UPDATED',
@@ -98,9 +98,9 @@ module.exports = io => {
         .catch((error) => next(error))
 
     },
-    // Fetch new student data
+
     getStudents,
-    // Respond with new student data in JSON and over socket
+
     (req, res, next) => {
       io.emit('action', {
         type: 'GAME_PLAYERS_UPDATED',

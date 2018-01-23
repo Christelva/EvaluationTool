@@ -1,4 +1,3 @@
-// routes/batchs.js
 const router = require('express').Router()
 const passport = require('../config/auth')
 const { Batch } = require('../models')
@@ -8,16 +7,13 @@ const authenticate = passport.authorize('jwt', { session: false })
 
 module.exports = io => {
   router
-    .get('/batchs', (req, res, next) => {
+    .get('/batches', (req, res, next) => {
       Batch.find()
-        // Newest batchs first
         .sort({ createdAt: -1 })
-        // Send the data in JSON format
-        .then((batchs) => res.json(batchs))
-        // Throw a 500 error if something goes wrong
+        .then((batches) => res.json(batches))
         .catch((error) => next(error))
     })
-    .get('/batchs/:id', (req, res, next) => {
+    .get('/batches/:id', (req, res, next) => {
       const id = req.params.id
 
       Batch.findById(id)
@@ -27,10 +23,10 @@ module.exports = io => {
         })
         .catch((error) => next(error))
     })
-    .post('/batchs', authenticate, (req, res, next) => {
+    .post('/batches', authenticate, (req, res, next) => {
       const newBatch = {
         userId: req.account._id,
-        players: [{
+        students: [{
           userId: req.account._id,
           pairs: []
         }],
@@ -41,28 +37,28 @@ module.exports = io => {
       Batch.create(newBatch)
         .then((batch) => {
           io.emit('action', {
-            type: 'GAME_CREATED',
+            type: 'Batch_CREATED',
             payload: batch
           })
           res.json(batch)
         })
         .catch((error) => next(error))
     })
-    .put('/batchs/:id', authenticate, (req, res, next) => {
+    .put('/batches/:id', authenticate, (req, res, next) => {
       const id = req.params.id
       const updatedBatch = req.body
 
       Batch.findByIdAndUpdate(id, { $set: updatedBatch }, { new: true })
         .then((batch) => {
           io.emit('action', {
-            type: 'GAME_UPDATED',
+            type: 'Batch_UPDATED',
             payload: batch
           })
           res.json(batch)
         })
         .catch((error) => next(error))
     })
-    .patch('/batchs/:id', authenticate, (req, res, next) => {
+    .patch('/batches/:id', authenticate, (req, res, next) => {
       const id = req.params.id
       const patchForBatch = req.body
 
@@ -75,7 +71,7 @@ module.exports = io => {
           Batch.findByIdAndUpdate(id, { $set: updatedBatch }, { new: true })
             .then((batch) => {
               io.emit('action', {
-                type: 'GAME_UPDATED',
+                type: 'Batch_UPDATED',
                 payload: batch
               })
               res.json(batch)
@@ -84,12 +80,12 @@ module.exports = io => {
         })
         .catch((error) => next(error))
     })
-    .delete('/batchs/:id', authenticate, (req, res, next) => {
+    .delete('/batches/:id', authenticate, (req, res, next) => {
       const id = req.params.id
       Batch.findByIdAndRemove(id)
         .then(() => {
           io.emit('action', {
-            type: 'GAME_REMOVED',
+            type: 'Batch_REMOVED',
             payload: id
           })
           res.status = 200
