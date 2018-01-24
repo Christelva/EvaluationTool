@@ -24,15 +24,7 @@ module.exports = io => {
         .catch((error) => next(error))
     })
     .post('/batches', authenticate, (req, res, next) => {
-      const newBatch = {
-        userId: req.account._id,
-        students: [{
-          userId: req.account._id,
-          pairs: []
-        }],
-        cards: utils.shuffle('✿✪♦✵♣♠♥✖'.repeat(2).split(''))
-          .map((symbol) => ({ visible: false, symbol }))
-      }
+      const newBatch = req.body
 
       Batch.create(newBatch)
         .then((batch) => {

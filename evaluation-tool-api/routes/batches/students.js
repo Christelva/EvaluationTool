@@ -26,7 +26,6 @@ const getStudents = (req, res, next) => {
 
         return {
           userId: student.userId,
-          pairs: student.pairs,
           name
         }
       })
@@ -103,7 +102,7 @@ module.exports = io => {
 
     (req, res, next) => {
       io.emit('action', {
-        type: 'GAME_PLAYERS_UPDATED',
+        type: 'BATCH_STUDENTS_UPDATED',
         payload: {
           batch: req.batch,
           students: req.students
