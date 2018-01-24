@@ -34,12 +34,12 @@ _**Note**: See `db/seed.js` for an example._
 
 | HTTP Verb | Path | Description |
 |-----------|------|--------------|
-| `GET` | `/batchs` | Retrieve all batchs |
-| `POST` | `/batchs` | Create a batch* |
-| `GET` | `/batchs/:id` | Retrieve a single batch by it's `id` |
-| `PUT` | `/batchs/:id` | Update a batch with a specific `id`* |
-| `PATCH` | `/batchs/:id` | Patch (partial update) a batch with a specific `id`* |
-| `DELETE` | `/batchs/:id` | Destroy a single batch by it's `id`* |
+| `GET` | `/batches` | Retrieve all batches |
+| `POST` | `/batches` | Create a batch* |
+| `GET` | `/batches/:id` | Retrieve a single batch by it's `id` |
+| `PUT` | `/batches/:id` | Update a batch with a specific `id`* |
+| `PATCH` | `/batches/:id` | Patch (partial update) a batch with a specific `id`* |
+| `DELETE` | `/batches/:id` | Destroy a single batch by it's `id`* |
 | | | _* Needs authentication_ |
 
-_**Note**: Run `yarn run seed` to seed some initial batchs._
+_**Note**: Run `yarn run seed` to seed some initial batches._

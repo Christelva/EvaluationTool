@@ -1,12 +1,12 @@
 const mongoose = require('../config/database')
-const { Schema } = mongoosechema({
+const { Schema } = mongoose
 
-  const studentAchema = new Schema ({
+  const studentSchema = new Schema ({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     photo: { type: String, required: true, default: 'http://dummyimage.com/100x100.jpg/ff4444/ffffff'},
     latestCode: { type: String },
-    evaluationRemarks: { type: Text },
+    evaluationRemarks: { type: String },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
   });

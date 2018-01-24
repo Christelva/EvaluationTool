@@ -1,4 +1,4 @@
-const batchs = require('./batches')
+const batches = require('./batches')
 const users = require('./users')
 const sessions = require('./sessions')
 const batchStudents = require('./batches/students')

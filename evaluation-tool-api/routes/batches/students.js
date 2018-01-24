@@ -37,12 +37,12 @@ const getStudents = (req, res, next) => {
 
 module.exports = io => {
   router
-    .get('/batchs/:id/students', loadBatch, getStudents, (req, res, next) => {
+    .get('/batches/:id/students', loadBatch, getStudents, (req, res, next) => {
       if (!req.batch || !req.students) { return next() }
       res.json(req.students)
     })
 
-    .post('/batchs/:id/students', authenticate, loadBatch, (req, res, next) => {
+    .post('/batches/:id/students', authenticate, loadBatch, (req, res, next) => {
       if (!req.batch) { return next() }
 
       const userId = req.account._id
@@ -77,7 +77,7 @@ module.exports = io => {
       res.json(req.students)
     })
 
-    .delete('/batchs/:id/students', authenticate, (req, res, next) => {
+    .delete('/batches/:id/students', authenticate, (req, res, next) => {
       if (!req.batch) { return next() }
 
       const userId = req.account._id
