@@ -2,8 +2,9 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import fetchBatches, { fetchStudents } from '../actions/batches/fetch'
-import { connect as subscribeToWebsocket } from '../actions/websocket'
+import { fetchBatches } from '../../actions/batches/fetch'
+import BatchItem from './BatchItem'
+
 
 import Paper from 'material-ui/Paper'
 import Menu from 'material-ui/Menu'
