@@ -25,6 +25,6 @@ class BatchesContainer extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ batches, currentUser }) => ({ batches, currentUser })
+const mapStateToProps = ({ batches }) => ({ batches })
 
-export default connect(mapStateToProps, { fetchBatches, subscribeToWebsocket, fetchStudents, push })(BatchesContainer)
+export default connect(mapStateToProps, { fetchBatches })(BatchesContainer)
