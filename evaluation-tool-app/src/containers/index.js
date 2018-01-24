@@ -1,10 +1,10 @@
-import Lobby from './Lobby'
+import BatchesContainer from './BatchesContainer'
 import Batch from './Batch'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 
 export {
-  Lobby,
+  BatchesContainer,
   Batch,
   SignIn,
   SignUp,

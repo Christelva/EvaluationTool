@@ -7,10 +7,10 @@ import {
   LOAD_ERROR,
   LOAD_SUCCESS
 } from '../loading'
-import { GAME_PLAYERS_UPDATED } from './subscribe'
+import { BATCH_PLAYERS_UPDATED } from './subscribe'
 
-export const FETCHED_GAMES = 'FETCHED_GAMES'
-export const FETCHED_ONE_GAME = 'FETCHED_ONE_GAME'
+export const FETCHED_BATCHS = 'FETCHED_BATCHS'
+export const FETCHED_ONE_BATCH = 'FETCHED_ONE_BATCH'
 
 const api = new API()
 
@@ -24,7 +24,7 @@ export default () => {
         dispatch({ type: LOAD_SUCCESS })
 
         dispatch({
-          type: FETCHED_GAMES,
+          type: FETCHED_BATCHS,
           payload: result.body
         })
       })
@@ -48,7 +48,7 @@ export const fetchStudents = (batch) => {
         dispatch({ type: LOAD_SUCCESS })
 
         dispatch({
-          type: GAME_PLAYERS_UPDATED,
+          type: BATCH_PLAYERS_UPDATED,
           payload: {
             batch,
             students: result.body
@@ -75,7 +75,7 @@ export const fetchOneBatch = (batchId) => {
         dispatch({ type: LOAD_SUCCESS })
 
         dispatch({
-          type: FETCHED_ONE_GAME,
+          type: FETCHED_ONE_BATCH,
           payload: result.body
         })
       })

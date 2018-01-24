@@ -1,6 +1,6 @@
 {
   "name": "batch-lobby",
-  "version": "0.1.0",
+  "version": "1.2.1",
   "private": true,
   "dependencies": {
     "history": "^4.7.2",
@@ -14,7 +14,8 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "socket.io-client": "^2.0.4",
-    "superagent": "^3.8.2"
+    "superagent": "^3.8.2",
+    "yarn": "1.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
