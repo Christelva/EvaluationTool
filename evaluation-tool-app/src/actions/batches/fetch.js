@@ -13,7 +13,7 @@ export const FETCHED_ONE_BATCH = 'FETCHED_ONE_BATCH'
 
 const api = new API()
 
-export default () => {
+export const fetchBatches = () => {
   return (dispatch) => {
     dispatch({ type: APP_LOADING })
 
